@@ -2,15 +2,16 @@ const { ApolloServer, gql } = require('apollo-server')
 const {
   ApolloServerPluginLandingPageGraphQLPlayground
 } = require('apollo-server-core')
+const { v4: uuidv4 } = require('uuid')
 
-const notes = [
+let notes = [
   {
-    id: '1',
+    id: uuidv4(),
     displayText: 'My first awesome note',
     author: 'Marc'
   },
   {
-    id: '2',
+    id: uuidv4(),
     displayText: 'Cute!',
     author: 'Marc'
   }
@@ -26,11 +27,22 @@ const typeDefs = gql`
   type Query {
     notes: [Note]
   }
+
+  type Mutation {
+    addNote(displayText: String, author: String): Note
+  }
 `
 
 const resolvers = {
   Query: {
     notes: () => notes
+  },
+  Mutation: {
+    addNote: (_, args) => {
+      const id = uuidv4()
+      notes.push({ id, ...args })
+      return args
+    }
   }
 }
 
