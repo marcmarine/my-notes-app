@@ -29,7 +29,8 @@ const typeDefs = gql`
   }
 
   type Mutation {
-    addNote(displayText: String, author: String): Note
+    createNote(displayText: String, author: String): Note
+    deleteNote(id: ID): String
   }
 `
 
@@ -38,10 +39,14 @@ const resolvers = {
     notes: () => notes
   },
   Mutation: {
-    addNote: (_, args) => {
+    createNote: (_, args) => {
       const id = uuidv4()
       notes.push({ id, ...args })
       return args
+    },
+    deleteNote: (_, args) => {
+      notes = notes.filter(note => note.id !== args.id)
+      return args.id
     }
   }
 }
