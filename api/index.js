@@ -26,6 +26,7 @@ const typeDefs = gql`
 
   type Query {
     notes: [Note]
+    noteById(id: ID!): Note
   }
 
   type Mutation {
@@ -36,7 +37,8 @@ const typeDefs = gql`
 
 const resolvers = {
   Query: {
-    notes: () => notes
+    notes: () => notes,
+    noteById: (_, args) => notes.find(note => note.id === args.id)
   },
   Mutation: {
     createNote: (_, args) => {
