@@ -6,12 +6,12 @@ const { v4: uuidv4 } = require('uuid')
 
 let notes = [
   {
-    id: uuidv4(),
+    id: '1',
     displayText: 'My first awesome note',
     author: 'Marc'
   },
   {
-    id: uuidv4(),
+    id: '2',
     displayText: 'Cute!',
     author: 'Marc'
   }

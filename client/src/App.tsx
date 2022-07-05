@@ -1,23 +1,13 @@
-import useNotes from './hooks/useNotes'
+import { QueryClient, QueryClientProvider } from 'react-query'
+import Notes from './components/Notes'
 
-type Note = {
-  id: String
-  displayText: String
-}
+const queryClient = new QueryClient()
 
 function App() {
-  const { data, isLoading } = useNotes()
-
-  if (isLoading) return <>loading...</>
-
   return (
-    <ul>
-      {data.map(
-        ({ id, displayText }: Note): JSX.Element => (
-          <li key={id}>{displayText}</li>
-        )
-      )}
-    </ul>
+    <QueryClientProvider client={queryClient}>
+      <Notes />
+    </QueryClientProvider>
   )
 }
 
