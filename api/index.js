@@ -28,7 +28,8 @@ const typeDefs = gql`
 
   type Mutation {
     createNote(displayText: String): Note
-    deleteNote(id: ID): String
+    deleteNote(id: ID!): String
+    updateNote(id: ID!, displayText: String): String
   }
 `
 
@@ -46,6 +47,12 @@ const resolvers = {
     deleteNote: (_, args) => {
       notes = notes.filter(note => note.id !== args.id)
       return args.id
+    },
+    updateNote: (_, args) => {
+      notes = notes.map(note =>
+        note.id === args.id ? { ...note, ...args } : note
+      )
+      return args.displayText
     }
   }
 }
