@@ -1,13 +1,12 @@
+import { Link } from 'react-router-dom'
 import { useState } from 'react'
-import useCreateNoteMutation from '../hooks/useCreateNoteMutation'
-import useDeleteNotesMutation from '../hooks/useDeleteNotesMutation'
-import useGetNotesQuery from '../hooks/useGetNotesQuery'
-import { Note } from '../types/note'
+import useCreateNoteMutation from '../../hooks/useCreateNoteMutation'
+import useGetNotesQuery from '../../hooks/useGetNotesQuery'
+import { Note } from '../../types/note'
 
 function Notes(): JSX.Element {
   const [displayText, setDisplayText] = useState('')
   const { status, data, error, isFetching } = useGetNotesQuery()
-  const { mutate: remove } = useDeleteNotesMutation()
   const { mutate: create } = useCreateNoteMutation()
 
   if (status === 'loading') return <>loading...</>
@@ -33,8 +32,9 @@ function Notes(): JSX.Element {
         {data.map(
           ({ id, displayText }: Note): JSX.Element => (
             <li key={id.toString()}>
-              <span>{displayText}</span>
-              <button onClick={() => remove({ id })}>borrar</button>
+              <Link to={`/${id}`}>
+                <span>{displayText}</span>
+              </Link>
             </li>
           )
         )}

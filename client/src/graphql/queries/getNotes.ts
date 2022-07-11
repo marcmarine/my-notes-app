@@ -1,7 +1,7 @@
 import { gql } from 'graphql-request'
 
 export const GET_NOTES = gql`
-  query {
+  query getNotes {
     notes {
       id
       displayText
