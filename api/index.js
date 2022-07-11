@@ -7,13 +7,11 @@ const { v4: uuidv4 } = require('uuid')
 let notes = [
   {
     id: '1',
-    displayText: 'My first awesome note',
-    author: 'Marc'
+    displayText: 'My first awesome note'
   },
   {
     id: '2',
-    displayText: 'Cute!',
-    author: 'Marc'
+    displayText: 'Cute!'
   }
 ]
 
@@ -21,7 +19,6 @@ const typeDefs = gql`
   type Note {
     id: String!
     displayText: String
-    author: String
   }
 
   type Query {
@@ -30,7 +27,7 @@ const typeDefs = gql`
   }
 
   type Mutation {
-    createNote(displayText: String, author: String): Note
+    createNote(displayText: String): Note
     deleteNote(id: ID): String
   }
 `
