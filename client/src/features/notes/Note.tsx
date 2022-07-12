@@ -1,4 +1,4 @@
-import { useParams } from 'react-router-dom'
+import { Link, useParams } from 'react-router-dom'
 import useGetNoteByIdQuery from '../../hooks/useGetNoteByIdQuery'
 
 function Note(): JSX.Element {
@@ -9,7 +9,12 @@ function Note(): JSX.Element {
 
   const { id, displayText } = data
 
-  return <>{displayText}</>
+  return (
+    <>
+      {displayText}
+      <Link to={`/${id}/edit`}>edit</Link>
+    </>
+  )
 }
 
 export default Note

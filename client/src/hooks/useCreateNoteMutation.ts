@@ -6,7 +6,7 @@ function useCreateNoteMutation() {
   const queryClient = useQueryClient()
 
   const createNote = ({ displayText }: { [key: string]: String }) =>
-    makeRequest(CREATE_NOTE, { displayText, author: '' })
+    makeRequest(CREATE_NOTE, { displayText })
 
   return useMutation(createNote, {
     onMutate: async newNote => {

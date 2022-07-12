@@ -1,6 +1,6 @@
 import { useMutation, useQueryClient } from 'react-query'
 import { makeRequest } from '../graphql/makeRequest'
-import { DELETE_NOTE } from '../graphql/mutations/deleteNote'
+import { DELETE_NOTE } from '../graphql/mutations/removeNote'
 import { Note } from '../types/note'
 
 function useDeleteNotesMutation() {
