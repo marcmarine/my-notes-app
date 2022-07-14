@@ -1,4 +1,4 @@
 export type Note = {
-  id: String
-  displayText: String
+  id: string
+  displayText: string
 }

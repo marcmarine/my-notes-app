@@ -7,15 +7,17 @@ function Note(): JSX.Element {
 
   const { id, displayText } = data ?? {}
   const paragraphs = displayText?.split('\n').filter((e: string) => e)
+  const shouldShowText = !isFetching
 
   return (
     <>
       <div className="fixed w-full p-5 h-screen  bg-transparent bg-opacity-10">
         <div className="border border-primary rounded-4xl px-6 py-4 h-full">
           <div className="h-[calc(100%-3rem)] overflow-auto">
-            {paragraphs?.map((paragraph: string, index: number) => (
-              <p key={index}>{paragraph}</p>
-            ))}
+            {shouldShowText &&
+              paragraphs?.map((paragraph: string, index: number) => (
+                <p key={index}>{paragraph}</p>
+              ))}
           </div>
         </div>
       </div>

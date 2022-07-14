@@ -1,4 +1,5 @@
 import { Link } from 'react-router-dom'
+import TextTruncate from 'react-text-truncate'
 import useGetNotesQuery from '../../hooks/useGetNotesQuery'
 import useDeleteNotesMutation from '../../hooks/useDeleteNotesMutation'
 import { Note } from '../../types/note'
@@ -26,7 +27,7 @@ function Notes(): JSX.Element {
                 borrar
               </button>
               <Link to={`/${id}`}>
-                <span>{displayText}</span>
+                <TextTruncate line={5} truncateText="…" text={displayText} />
               </Link>
             </li>
           )
