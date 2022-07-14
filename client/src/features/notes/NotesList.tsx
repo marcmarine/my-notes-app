@@ -1,48 +1,38 @@
 import { Link } from 'react-router-dom'
-import { useState } from 'react'
-import useCreateNoteMutation from '../../hooks/useCreateNoteMutation'
 import useGetNotesQuery from '../../hooks/useGetNotesQuery'
-
 import useDeleteNotesMutation from '../../hooks/useDeleteNotesMutation'
 import { Note } from '../../types/note'
+import NoteCreate from './NoteCreate'
 
 function Notes(): JSX.Element {
-  const [displayText, setDisplayText] = useState('')
   const { status, data, error, isFetching } = useGetNotesQuery()
-  const { mutate: create } = useCreateNoteMutation()
   const { mutate: remove } = useDeleteNotesMutation()
 
   if (status === 'loading') return <>loading...</>
 
   return (
     <>
-      <ul>
+      <ul className="grid grid-cols-4 gap-5 p-5">
         {data.map(
           ({ id, displayText }: Note): JSX.Element => (
-            <li key={id.toString()}>
+            <li
+              key={id.toString()}
+              className="px-6 py-4 border relative border-primary rounded-4xl h-[12rem] overflow-hidden"
+            >
+              <button
+                onClick={() => remove({ id })}
+                className="absolute bottom-5 right-5"
+              >
+                borrar
+              </button>
               <Link to={`/${id}`}>
                 <span>{displayText}</span>
               </Link>
-              <button onClick={() => remove({ id })}>borrar</button>
             </li>
           )
         )}
       </ul>
-      <form
-        onSubmit={event => {
-          event.preventDefault()
-          create({ displayText })
-          setDisplayText('')
-        }}
-      >
-        <input
-          id="note"
-          type="text"
-          value={displayText}
-          onChange={event => setDisplayText(event.target.value)}
-        />
-        <button type="submit">create</button>
-      </form>
+      <NoteCreate />
     </>
   )
 }
