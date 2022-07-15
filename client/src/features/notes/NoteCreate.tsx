@@ -35,7 +35,7 @@ function NoteCreate(): JSX.Element {
           </div>
           <button
             onClick={handleCreate}
-            className="fixed grid w-14 h-14 m-1 bottom-5 right-5 bg-primary rounded-full place-content-center"
+            className="fixed grid w-16 h-16 m-2 bottom-5 right-5 bg-primary rounded-full place-content-center"
           >
             <svg
               xmlns="http://www.w3.org/2000/svg"
@@ -56,10 +56,10 @@ function NoteCreate(): JSX.Element {
       )}
       <button
         onClick={handleOpen}
-        className={`fixed bottom-5 right-5 rounded-full text-background grid place-content-center transform ${
+        className={`fixed w-16 h-16 m-2 bottom-5 right-5 rounded-full text-background grid place-content-center transform ${
           isOpen
-            ? 'w-14 h-14 m-1 left-5 right-auto rotate-45 bg-transparent shadow-none opacity-20 hover:bg-red-500 hover:text-white hover:opacity-100'
-            : ' w-16 h-16 bg-primary text-background shadow-md'
+            ? 'left-5 right-auto rotate-45 bg-transparent shadow-none opacity-20 hover:bg-red-500 hover:text-white hover:opacity-100'
+            : 'bg-primary text-background shadow-md'
         } transition-all`}
       >
         <svg

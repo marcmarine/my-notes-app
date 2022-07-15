@@ -6,7 +6,7 @@ import { Note } from '../types/note'
 function useDeleteNotesMutation() {
   const queryClient = useQueryClient()
 
-  const deleteNote = ({ id }: { [key: string]: String }) =>
+  const deleteNote = ({ id }: { [key: string]: string }) =>
     makeRequest(DELETE_NOTE, { id })
 
   return useMutation(deleteNote, {

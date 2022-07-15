@@ -23,7 +23,7 @@ function Note(): JSX.Element {
       </div>
       <Link
         to="/"
-        className="fixed grid w-16 h-16 bottom-5 left-5 bg-white bg-opacity-10 rounded-full place-content-center"
+        className="fixed grid w-16 h-16 m-2 bottom-5 left-5 bg-white bg-opacity-10 rounded-full place-content-center"
       >
         <svg
           xmlns="http://www.w3.org/2000/svg"
@@ -42,7 +42,7 @@ function Note(): JSX.Element {
       </Link>
       <Link
         to={`/${id}/edit`}
-        className="fixed grid w-16 h-16 bottom-5 right-5 bg-white bg-opacity-10 rounded-full place-content-center"
+        className="fixed grid w-16 h-16 m-2 bottom-5 right-5 bg-white bg-opacity-10 rounded-full place-content-center"
       >
         <svg
           xmlns="http://www.w3.org/2000/svg"
