@@ -13,14 +13,14 @@ function NoteItem({ id, displayText }: Note): JSX.Element {
   return (
     <li
       key={id.toString()}
-      className="px-6 py-4 border relative border-primary rounded-4xl h-[12rem] overflow-hidden"
+      className="border relative border-primary rounded-4xl h-[12rem] overflow-hidden"
     >
       <ConfirmDialog>
         {confirm => {
           return (
             <button
               onClick={() => confirm(removeNote)}
-              className="absolute bottom-5 right-5 w-8 h-8 grid place-content-center rounded-full hover:bg-white hover:bg-opacity-10"
+              className="absolute z-10 bottom-5 right-5 w-8 h-8 grid place-content-center rounded-full hover:bg-white hover:bg-opacity-10"
             >
               <svg
                 xmlns="http://www.w3.org/2000/svg"
@@ -40,7 +40,10 @@ function NoteItem({ id, displayText }: Note): JSX.Element {
           )
         }}
       </ConfirmDialog>
-      <Link to={`/${id}`}>
+      <Link
+        to={`/${id}`}
+        className="block w-full h-full px-6 py-4 opacity-80 hover:opacity-100 transition"
+      >
         <TextTruncate line={5} truncateText="…" text={displayText} />
       </Link>
     </li>

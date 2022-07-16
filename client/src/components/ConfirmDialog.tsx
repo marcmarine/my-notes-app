@@ -24,7 +24,7 @@ function ConfirmDialog({ children }: ConfirmDialogType) {
     <>
       {children(confirm)}
       {isOpen && (
-        <div className="fixed top-1/2 left-1/2 p-1 w-64 transform -translate-x-1/2 -translate-y-1/2 bg-white text-black rounded-4xl shadow-md">
+        <div className="fixed z-40 top-1/2 left-1/2 p-1 w-64 transform -translate-x-1/2 -translate-y-1/2 bg-white text-black rounded-4xl shadow-md">
           <h2 className="p-5 mb-5">Please, confirm this action</h2>
           <div className="flex justify-between">
             <button

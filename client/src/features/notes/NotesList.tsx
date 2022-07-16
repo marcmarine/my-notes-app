@@ -10,7 +10,7 @@ function Notes(): JSX.Element {
 
   return (
     <>
-      <ul className="grid grid-cols-4 gap-5 p-5">
+      <ul className="grid grid-cols-[repeat(auto-fill,minmax(12rem,1fr))] gap-5 p-5">
         {data.map(
           (props: Note): JSX.Element => (
             <NoteItem key={props.id} {...props} />
