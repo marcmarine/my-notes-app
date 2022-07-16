@@ -1,7 +1,7 @@
 import { useMutation, useQueryClient } from 'react-query'
 import { makeRequest } from '../graphql/makeRequest'
 import { UPDATE_NOTE } from '../graphql/mutations/updateNote'
-import { Note } from '../types/note'
+import { Note } from '../features/notes'
 
 function useUpdateNotesMutation() {
   const queryClient = useQueryClient()
@@ -15,6 +15,13 @@ function useUpdateNotesMutation() {
 
       const previousNote = queryClient.getQueryData<Note>('note')
       const newNote = { ...previousNote, displayText }
+
+      const previousNotes = queryClient.getQueryData<Note[]>('notes')
+      const newNotes = previousNotes?.map((note: Note) =>
+        note.id === id ? { ...note, displayText } : note
+      )
+
+      queryClient.setQueryData('notes', newNotes)
 
       return newNote
     },

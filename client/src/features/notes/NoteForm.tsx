@@ -1,41 +1,36 @@
-import { useState } from 'react'
-import {
-  useParams,
-  useNavigate,
-  Link,
-  useOutletContext
-} from 'react-router-dom'
+import { useState, useEffect } from 'react'
+import { useNavigate, Link, useOutletContext } from 'react-router-dom'
 import { NotesContextType } from '.'
-import useGetNoteByIdQuery from '../../hooks/useGetNoteByIdQuery'
 
 function NoteForm(): JSX.Element {
-  const { noteId } = useParams()
-  const { data, status } = useGetNoteByIdQuery(noteId)
-  const { update } = useOutletContext() as NotesContextType
   const navigate = useNavigate()
+  const { update, note } = useOutletContext<NotesContextType>()
+  const [currentText, setCurrentText] = useState('')
 
-  if (status === 'loading') return <>loading...</>
+  const { id, displayText } = note ?? {}
 
-  const { id, displayText } = data
-  const [currentText, setCurrentText] = useState(displayText)
+  useEffect(() => {
+    setCurrentText(displayText)
+  }, [displayText])
 
   function updateNote() {
-    update(id, displayText)
+    update(id, currentText)
     navigate(`/${id}`)
   }
 
   return (
-    <div className="fixed w-full p-5 h-screen  bg-transparent bg-opacity-10">
-      <div className="border border-primary rounded-4xl px-6 py-4 h-full">
+    <div className="fixed w-full p-5 h-screen bg-transparent bg-opacity-10">
+      <div className="border rounded-4xl px-6 py-4 h-full bg-white text-black">
         <textarea
           value={currentText}
           onChange={event => setCurrentText(event.target.value)}
           className="w-full h-[calc(100%-4rem)] flex-1 focus:outline-none bg-transparent"
+          autoFocus
         />
       </div>
       <Link
         to={`/${id}`}
-        className="fixed grid w-16 h-16 m-2 bottom-5 left-5 bg-white bg-opacity-10 rounded-full place-content-center"
+        className="fixed z-10 grid w-16 h-16 m-2 bottom-5 left-5 text-background rounded-full place-content-center"
       >
         <svg
           xmlns="http://www.w3.org/2000/svg"
@@ -54,7 +49,7 @@ function NoteForm(): JSX.Element {
       </Link>
       <button
         onClick={updateNote}
-        className="fixed grid w-16 h-16 m-2 bottom-5 right-5 bg-white bg-opacity-10 rounded-full place-content-center"
+        className="fixed grid w-16 h-16 m-2 bottom-5 right-5 bg-primary rounded-full place-content-center"
       >
         <svg
           xmlns="http://www.w3.org/2000/svg"

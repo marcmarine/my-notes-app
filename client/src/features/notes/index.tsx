@@ -1,7 +1,8 @@
-import { Outlet } from 'react-router-dom'
+import { Outlet, useParams } from 'react-router-dom'
 import useGetNotesQuery from '../../hooks/useGetNotesQuery'
 import useCreateNoteMutation from '../../hooks/useCreateNoteMutation'
 import useDeleteNotesMutation from '../../hooks/useDeleteNotesMutation'
+import useGetNoteByIdQuery from '../../hooks/useGetNoteByIdQuery'
 import { useNotifications } from '../../components/Notifications'
 
 import useUpdateNotesMutation from '../../hooks/useUpdateNoteMutation'
@@ -11,7 +12,8 @@ export interface Note {
 }
 
 export type NotesContextType = {
-  data: Note[]
+  note: Note
+  notes: Note[]
   status: string
   create: (text: string) => void
   remove: (id: string) => void
@@ -19,7 +21,9 @@ export type NotesContextType = {
 }
 
 function Notes(): JSX.Element {
-  const { status, data } = useGetNotesQuery()
+  const { noteId } = useParams()
+  const { status: statusNotes, data: notes } = useGetNotesQuery()
+  const { data: note, status: statusNote } = useGetNoteByIdQuery(noteId || '')
   const { mutate: createMutation } = useCreateNoteMutation()
   const { mutate: removeMutation } = useDeleteNotesMutation()
   const { mutate: updateMutation } = useUpdateNotesMutation()
@@ -49,7 +53,18 @@ function Notes(): JSX.Element {
     updateMutation({ id, displayText })
   }
 
-  return <Outlet context={{ data, status, create, remove, update }} />
+  return (
+    <Outlet
+      context={{
+        notes,
+        note,
+        status: statusNotes || statusNote,
+        create,
+        remove,
+        update
+      }}
+    />
+  )
 }
 
 export default Notes

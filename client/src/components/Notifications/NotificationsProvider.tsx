@@ -1,5 +1,6 @@
 import { ReactNode, useState } from 'react'
 import NotificationsContext from './NotificationsContext'
+import { motion, AnimatePresence } from 'framer-motion'
 
 function NotificationsProvider({
   children
@@ -20,13 +21,21 @@ function NotificationsProvider({
   return (
     <NotificationsContext.Provider value={{ notify }}>
       {children}
-      {isVisible && (
-        <div className="fixed left-1/2 bottom-5 transform -translate-x-1/2">
-          <div className="rounded-4xl bg-white px-10 py-5 text-black m-2 shadow-md whitespace-nowrap">
-            {notification}
+      <AnimatePresence>
+        {isVisible && (
+          <div className="fixed left-0 bottom-0 flex w-full p-5 justify-center">
+            <motion.div
+              initial={{ scale: 0 }}
+              animate={{ scale: 1 }}
+              exit={{ scale: 0 }}
+            >
+              <div className="rounded-4xl bg-white px-10 py-5 text-black m-2 shadow-md whitespace-nowrap">
+                {notification}
+              </div>
+            </motion.div>
           </div>
-        </div>
-      )}
+        )}
+      </AnimatePresence>
     </NotificationsContext.Provider>
   )
 }
