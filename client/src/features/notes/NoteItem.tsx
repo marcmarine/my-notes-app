@@ -1,11 +1,14 @@
-import { Link } from 'react-router-dom'
+import { Link, useOutletContext } from 'react-router-dom'
 import TextTruncate from 'react-text-truncate'
-import useDeleteNotesMutation from '../../hooks/useDeleteNotesMutation'
-import { Note } from '../../types/note'
+import { Note, NotesContextType } from './'
 import ConfirmDialog from '../../components/ConfirmDialog'
 
 function NoteItem({ id, displayText }: Note): JSX.Element {
-  const { mutate: remove } = useDeleteNotesMutation()
+  const { remove } = useOutletContext() as NotesContextType
+
+  function removeNote() {
+    remove(id)
+  }
 
   return (
     <li
@@ -16,7 +19,7 @@ function NoteItem({ id, displayText }: Note): JSX.Element {
         {confirm => {
           return (
             <button
-              onClick={() => confirm(() => remove({ id }))}
+              onClick={() => confirm(removeNote)}
               className="absolute bottom-5 right-5 w-8 h-8 grid place-content-center rounded-full hover:bg-white hover:bg-opacity-10"
             >
               <svg

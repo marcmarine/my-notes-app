@@ -1,4 +1,4 @@
-import { ReactNode, useState, MouseEventHandler } from 'react'
+import { ReactNode, useState, MouseEventHandler, useCallback } from 'react'
 
 type ConfirmDialogType = {
   children: (confirm: (callback: () => void) => void) => ReactNode

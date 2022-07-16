@@ -1,17 +1,18 @@
 import { useState } from 'react'
-import useCreateNoteMutation from '../../hooks/useCreateNoteMutation'
+import { useOutletContext } from 'react-router-dom'
+import { NotesContextType } from '.'
 
 function NoteCreate(): JSX.Element {
-  const [isOpen, setIsOpen] = useState(false)
-  const [displayText, setDisplayText] = useState('')
-  const { mutate: create } = useCreateNoteMutation()
+  const [isOpen, setIsOpen] = useState<boolean>(false)
+  const [displayText, setDisplayText] = useState<string>('')
+  const { create } = useOutletContext() as NotesContextType
 
-  function handleOpen(): void {
+  function handleOpen() {
     setIsOpen(!isOpen)
   }
 
-  function handleCreate(): void {
-    create({ displayText })
+  function createNote() {
+    create(displayText)
     setDisplayText('')
     setIsOpen(false)
   }
@@ -34,7 +35,7 @@ function NoteCreate(): JSX.Element {
             </div>
           </div>
           <button
-            onClick={handleCreate}
+            onClick={createNote}
             className="fixed grid w-16 h-16 m-2 bottom-5 right-5 bg-primary rounded-full place-content-center"
           >
             <svg

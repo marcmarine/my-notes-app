@@ -1,11 +1,11 @@
-import useGetNotesQuery from '../../hooks/useGetNotesQuery'
-import { Note } from '../../types/note'
+import { useOutletContext } from 'react-router-dom'
+import { NotesContextType } from '.'
+import { Note } from './'
 import NoteCreate from './NoteCreate'
 import NoteItem from './NoteItem'
 
 function Notes(): JSX.Element {
-  const { status, data, error, isFetching } = useGetNotesQuery()
-
+  const { data, status } = useOutletContext() as NotesContextType
   if (status === 'loading') return <>loading...</>
 
   return (
