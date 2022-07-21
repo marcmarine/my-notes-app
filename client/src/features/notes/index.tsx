@@ -1,10 +1,10 @@
 import { Outlet, useParams } from 'react-router-dom'
+import { nanoid } from 'nanoid'
 import useGetNotesQuery from '../../hooks/useGetNotesQuery'
 import useCreateNoteMutation from '../../hooks/useCreateNoteMutation'
 import useDeleteNotesMutation from '../../hooks/useDeleteNotesMutation'
 import useGetNoteByIdQuery from '../../hooks/useGetNoteByIdQuery'
 import { useNotifications } from '../../components/Notifications'
-
 import useUpdateNotesMutation from '../../hooks/useUpdateNoteMutation'
 export interface Note {
   id: string
@@ -30,8 +30,9 @@ function Notes(): JSX.Element {
   const { notify } = useNotifications()
 
   function create(displayText: string) {
+    const id = nanoid(8)
     createMutation(
-      { displayText },
+      { id, displayText },
       {
         onSuccess: () => notify('created!'),
         onError: () => notify('Ups, something went wrong!')

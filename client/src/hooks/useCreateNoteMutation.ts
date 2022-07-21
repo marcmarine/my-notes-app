@@ -5,8 +5,8 @@ import { CREATE_NOTE } from '../graphql/mutations/createNote'
 function useCreateNoteMutation() {
   const queryClient = useQueryClient()
 
-  const createNote = ({ displayText }: { [key: string]: String }) =>
-    makeRequest(CREATE_NOTE, { displayText })
+  const createNote = ({ id, displayText }: { [key: string]: String }) =>
+    makeRequest(CREATE_NOTE, { id, displayText })
 
   return useMutation(createNote, {
     onMutate: async newNote => {
@@ -14,10 +14,7 @@ function useCreateNoteMutation() {
 
       const previousTodos = queryClient.getQueryData('notes')
 
-      queryClient.setQueryData('notes', (old: any) => [
-        ...old,
-        { id: 'temp', ...newNote }
-      ])
+      queryClient.setQueryData('notes', (old: any) => [...old, newNote])
 
       return { previousTodos }
     },
