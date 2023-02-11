@@ -9,15 +9,16 @@
 body {
   @apply bg-background text-white;
   margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
-    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
-    sans-serif;
+  font-family: 'Rubik', sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   font-size: 1.2rem;
 }
 
-code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
-    monospace;
+.btn {
+  @apply px-2 py-2 text-center border-2 border-white bg-background text-white font-medium focus:outline-0 active:bg-white active:text-background;
+}
+
+.wrapper {
+  @apply max-w-xl mx-auto;
 }

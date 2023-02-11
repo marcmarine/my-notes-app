@@ -23,13 +23,13 @@ function NotificationsProvider({
       {children}
       <AnimatePresence>
         {isVisible && (
-          <div className="fixed left-0 bottom-0 flex w-full p-5 justify-center">
+          <div className="fixed left-0 bottom-20 flex w-full p-5 justify-center">
             <motion.div
               initial={{ scale: 0 }}
               animate={{ scale: 1 }}
               exit={{ scale: 0 }}
             >
-              <div className="rounded-4xl bg-white px-10 py-5 text-black m-2 shadow-md whitespace-nowrap">
+              <div className="bg-white py-2 px-5 text-background whitespace-nowrap">
                 {notification}
               </div>
             </motion.div>

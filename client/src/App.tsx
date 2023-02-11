@@ -6,15 +6,17 @@ import NotesList from './features/notes/NotesList'
 import Note from './features/notes/Note'
 import NoteForm from './features/notes/NoteForm'
 import { NotificationsProvider } from './components/Notifications'
+import 'typeface-rubik'
 
 const queryClient = new QueryClient()
 
 function App() {
   const location = useLocation()
+
   return (
     <QueryClientProvider client={queryClient}>
-      <NotificationsProvider>
-        <AnimatePresence initial={false}>
+      <AnimatePresence initial={false}>
+        <NotificationsProvider>
           <Routes location={location} key={location.pathname}>
             <Route path="/" element={<Notes />}>
               <Route index element={<NotesList />} />
@@ -22,8 +24,8 @@ function App() {
               <Route path=":noteId/edit" element={<NoteForm />} />
             </Route>
           </Routes>
-        </AnimatePresence>
-      </NotificationsProvider>
+        </NotificationsProvider>
+      </AnimatePresence>
     </QueryClientProvider>
   )
 }

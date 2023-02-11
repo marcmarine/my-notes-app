@@ -1,4 +1,4 @@
-import { Outlet, useParams } from 'react-router-dom'
+import { useNavigate, Outlet, useParams } from 'react-router-dom'
 import { nanoid } from 'nanoid'
 import useGetNotesQuery from '../../hooks/useGetNotesQuery'
 import useCreateNoteMutation from '../../hooks/useCreateNoteMutation'
@@ -22,6 +22,7 @@ export type NotesContextType = {
 
 function Notes(): JSX.Element {
   const { noteId } = useParams()
+  const navigate = useNavigate()
   const { status: statusNotes, data: notes } = useGetNotesQuery()
   const { data: note, status: statusNote } = useGetNoteByIdQuery(noteId || '')
   const { mutate: createMutation } = useCreateNoteMutation()
@@ -44,14 +45,26 @@ function Notes(): JSX.Element {
     removeMutation(
       { id },
       {
-        onSuccess: () => notify('removed!'),
+        onSuccess: () => {
+          notify('removed!')
+          navigate('/')
+        },
         onError: () => notify('Ups, something went wrong!')
       }
     )
   }
 
   function update(id: string, displayText: string) {
-    updateMutation({ id, displayText })
+    updateMutation(
+      { id, displayText },
+      {
+        onSuccess: () => {
+          notify('updated!')
+          navigate(`/${id}`)
+        },
+        onError: () => notify('Ups, something went wrong!')
+      }
+    )
   }
 
   return (

@@ -1,5 +1,5 @@
 import { useOutletContext } from 'react-router-dom'
-import { motion, AnimatePresence } from 'framer-motion'
+import { AnimatePresence } from 'framer-motion'
 import { NotesContextType } from '.'
 import { Note } from './'
 import NoteCreate from './NoteCreate'
@@ -11,12 +11,7 @@ function Notes(): JSX.Element {
 
   return (
     <>
-      <motion.ul
-        initial={{ opacity: 0 }}
-        animate={{ opacity: 1 }}
-        exit={{ opacity: 0 }}
-        className="grid grid-cols-[repeat(auto-fill,minmax(12rem,1fr))] gap-5 px-5 pt-5 pb-20"
-      >
+      <ul className="wrapper flex flex-col px-5 pt-5 pb-32 -space-y-0.5">
         <AnimatePresence initial={false}>
           {notes.map(
             (props: Note): JSX.Element => (
@@ -24,7 +19,7 @@ function Notes(): JSX.Element {
             )
           )}
         </AnimatePresence>
-      </motion.ul>
+      </ul>
       <NoteCreate />
     </>
   )
