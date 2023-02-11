@@ -4,8 +4,8 @@ import { NotesContextType } from '.'
 function Note(): JSX.Element {
   const { note } = useOutletContext<NotesContextType>()
 
-  const { id, displayText } = note ?? {}
-  const paragraphs = displayText?.split('\n').filter((e: string) => e)
+  const { id, content } = note ?? {}
+  const paragraphs = content?.split('\n').filter((e: string) => e)
   const shouldShowText = Boolean(note)
 
   return (

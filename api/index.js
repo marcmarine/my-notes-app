@@ -7,18 +7,18 @@ const { v4: uuidv4 } = require('uuid')
 let notes = [
   {
     id: '1',
-    displayText: 'My first awesome note'
+    content: 'My first awesome note'
   },
   {
     id: '2',
-    displayText: 'Cute!'
+    content: 'Cute!'
   }
 ]
 
 const typeDefs = gql`
   type Note {
     id: String!
-    displayText: String
+    content: String
   }
 
   type Query {
@@ -27,9 +27,9 @@ const typeDefs = gql`
   }
 
   type Mutation {
-    createNote(id: ID, displayText: String!): Note
+    createNote(id: ID, content: String!): Note
     deleteNote(id: ID!): String
-    updateNote(id: ID!, displayText: String): String
+    updateNote(id: ID!, content: String): String
   }
 `
 
@@ -52,7 +52,7 @@ const resolvers = {
       notes = notes.map(note =>
         note.id === args.id ? { ...note, ...args } : note
       )
-      return args.displayText
+      return args.content
     }
   }
 }

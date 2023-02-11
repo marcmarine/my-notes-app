@@ -1,18 +1,17 @@
 import { useState, useEffect } from 'react'
-import { useNavigate, Link, useOutletContext } from 'react-router-dom'
+import { Link, useOutletContext } from 'react-router-dom'
 import { NotesContextType } from '.'
 import ConfirmDialog from '../../components/ConfirmDialog'
 
 function NoteForm(): JSX.Element {
-  const navigate = useNavigate()
   const { update, note, remove } = useOutletContext<NotesContextType>()
   const [currentText, setCurrentText] = useState('')
 
-  const { id, displayText } = note ?? {}
+  const { id, content } = note ?? {}
 
   useEffect(() => {
-    setCurrentText(displayText)
-  }, [displayText])
+    setCurrentText(content)
+  }, [content])
 
   function updateNote() {
     update(id, currentText)

@@ -6,19 +6,19 @@ import { Note } from '../features/notes'
 function useUpdateNotesMutation() {
   const queryClient = useQueryClient()
 
-  const updateNote = ({ id, displayText }: { [key: string]: String }) =>
-    makeRequest(UPDATE_NOTE, { id, displayText })
+  const updateNote = ({ id, content }: { [key: string]: String }) =>
+    makeRequest(UPDATE_NOTE, { id, content })
 
   return useMutation(updateNote, {
-    onMutate: async ({ id, displayText }) => {
+    onMutate: async ({ id, content }) => {
       await queryClient.cancelQueries('note')
 
       const previousNote = queryClient.getQueryData<Note>('note')
-      const newNote = { ...previousNote, displayText }
+      const newNote = { ...previousNote, content }
 
       const previousNotes = queryClient.getQueryData<Note[]>('notes')
       const newNotes = previousNotes?.map((note: Note) =>
-        note.id === id ? { ...note, displayText } : note
+        note.id === id ? { ...note, content } : note
       )
 
       queryClient.setQueryData('notes', newNotes)

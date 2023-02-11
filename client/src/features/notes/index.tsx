@@ -8,7 +8,7 @@ import { useNotifications } from '../../components/Notifications'
 import useUpdateNotesMutation from '../../hooks/useUpdateNoteMutation'
 export interface Note {
   id: string
-  displayText: string
+  content: string
 }
 
 export type NotesContextType = {
@@ -30,10 +30,10 @@ function Notes(): JSX.Element {
   const { mutate: updateMutation } = useUpdateNotesMutation()
   const { notify } = useNotifications()
 
-  function create(displayText: string) {
+  function create(content: string) {
     const id = nanoid(8)
     createMutation(
-      { id, displayText },
+      { id, content },
       {
         onSuccess: () => notify('created!'),
         onError: () => notify('Ups, something went wrong!')
@@ -54,9 +54,9 @@ function Notes(): JSX.Element {
     )
   }
 
-  function update(id: string, displayText: string) {
+  function update(id: string, content: string) {
     updateMutation(
-      { id, displayText },
+      { id, content },
       {
         onSuccess: () => {
           notify('updated!')

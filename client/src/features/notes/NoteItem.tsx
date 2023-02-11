@@ -3,7 +3,7 @@ import TextTruncate from 'react-text-truncate'
 import { motion } from 'framer-motion'
 import { Note, NotesContextType } from './'
 
-function NoteItem({ id, displayText }: Note): JSX.Element {
+function NoteItem({ id, content }: Note): JSX.Element {
   return (
     <li>
       <motion.div
@@ -17,7 +17,7 @@ function NoteItem({ id, displayText }: Note): JSX.Element {
           to={`/${id}`}
           className="block w-full h-full px-5 py-2 opacity-80 hover:opacity-100 transition"
         >
-          <TextTruncate line={5} truncateText="…" text={displayText} />
+          <TextTruncate line={5} truncateText="…" text={content} />
         </Link>
       </motion.div>
     </li>

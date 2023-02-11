@@ -5,17 +5,17 @@ import { NotesContextType } from '.'
 
 function NoteCreate(): JSX.Element {
   const [isOpen, setIsOpen] = useState<boolean>(false)
-  const [displayText, setDisplayText] = useState<string>('')
+  const [content, setContent] = useState<string>('')
   const { create } = useOutletContext() as NotesContextType
 
   function handleOpen() {
     setIsOpen(!isOpen)
-    setDisplayText('')
+    setContent('')
   }
 
   function createNote() {
-    create(displayText)
-    setDisplayText('')
+    create(content)
+    setContent('')
     setIsOpen(false)
   }
 
@@ -39,8 +39,8 @@ function NoteCreate(): JSX.Element {
               >
                 <textarea
                   id="note"
-                  value={displayText}
-                  onChange={event => setDisplayText(event.target.value)}
+                  value={content}
+                  onChange={event => setContent(event.target.value)}
                   placeholder="Write a note here"
                   className="px-5 py-2 border-2 w-full h-full placeholder:text-white/20 flex-1 focus:outline-none text-white bg-background resize-none"
                   autoComplete="off"

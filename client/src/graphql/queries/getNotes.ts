@@ -4,7 +4,7 @@ export const GET_NOTES = gql`
   query getNotes {
     notes {
       id
-      displayText
+      content
     }
   }
 `

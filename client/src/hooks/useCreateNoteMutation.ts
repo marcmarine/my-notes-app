@@ -5,8 +5,8 @@ import { CREATE_NOTE } from '../graphql/mutations/createNote'
 function useCreateNoteMutation() {
   const queryClient = useQueryClient()
 
-  const createNote = ({ id, displayText }: { [key: string]: String }) =>
-    makeRequest(CREATE_NOTE, { id, displayText })
+  const createNote = ({ id, content }: { [key: string]: String }) =>
+    makeRequest(CREATE_NOTE, { id, content })
 
   return useMutation(createNote, {
     onMutate: async newNote => {

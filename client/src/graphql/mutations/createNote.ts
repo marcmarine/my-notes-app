@@ -1,10 +1,10 @@
 import { gql } from 'graphql-request'
 
 export const CREATE_NOTE = gql`
-  mutation createNote($displayText: String!, $id: ID) {
-    createNote(displayText: $displayText, id: $id) {
+  mutation createNote($content: String!, $id: ID) {
+    createNote(content: $content, id: $id) {
       id
-      displayText
+      content
     }
   }
 `
