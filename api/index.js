@@ -6,18 +6,21 @@ const { v4: uuidv4 } = require('uuid')
 
 let notes = [
   {
-    id: '1',
-    content: 'My first awesome note'
+    id: 'WBAilNNS',
+    content: 'My first awesome note',
+    createdAt: '2023-02-12T00:04:45.662Z'
   },
   {
-    id: '2',
-    content: 'Cute!'
+    id: '8w6BfcZF',
+    content: 'Cute!',
+    createdAt: '2023-02-12T00:04:46.223Z'
   }
 ]
 
 const typeDefs = gql`
   type Note {
     id: String!
+    createdAt: String!
     content: String
   }
 
@@ -41,7 +44,7 @@ const resolvers = {
   Mutation: {
     createNote: (_, args) => {
       const id = uuidv4()
-      notes.push({ id, ...args })
+      notes.push({ id, ...args, createdAt: new Date().toISOString() })
       return args
     },
     deleteNote: (_, args) => {
